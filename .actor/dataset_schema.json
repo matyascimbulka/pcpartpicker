@@ -1,90 +1,53 @@
 {
     "actorSpecification": 1,
-    "fields": {
-        "$schema": "http://json-schema.org/draft-07/schema#",
-        "type": "object",
-        "properties": {
-            "id": {
-                "type": "string"
+    "fields": {},
+    "views": {
+        "overview": {
+            "title": "Overview",
+            "transformation": {
+                "fields": [
+                    "name",
+                    "category",
+                    "prices",
+                    "ratings",
+                    "specifications",
+                    "reviews",
+                    "url"
+                ]
             },
-            "name": {
-                "type": "string"
-            },
-            "category": {
-                "type": "string"
-            },
-            "url": {
-                "type": "string"
-            },
-            "prices": {
-                "type": "object",
+            "display": {
+                "component": "table",
                 "properties": {
-                    "lowestPrice": {
-                        "type": "number"
+                    "name": {
+                        "label": "Name",
+                        "format": "text"
+                    },
+                    "category": {
+                        "label": "Category",
+                        "format": "text"
                     },
                     "prices": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "merchant": {
-                                    "type": "string"
-                                },
-                                "availability": {
-                                    "type": "string"
-                                },
-                                "price": {
-                                    "type": "number"
-                                },
-                                "currency": {
-                                    "type": "string"
-                                },
-                                "buyLink": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "ratings": {
-                "type": "object",
-                "properties": {
-                    "averageRating": {
-                        "type": "number"
+                        "label": "Prices",
+                        "format": "object"
                     },
-                    "numberOfRatings": {
-                        "type": "number"
+                    "ratings": {
+                        "label": "Ratings",
+                        "format": "array"
                     },
-                    "percentages": {
-                        "type": "object"
-                    }
-                }
-            },
-            "specifications": {
-                "type": "object"
-            },
-            "reviews": {
-                "type": "array",
-                "items": {
-                    "type": "object",
-                    "properties": {
-                        "author": {
-                            "type": "string"
-                        },
-                        "date": {
-                            "age": "string"
-                        },
-                        "rating": {
-                            "type": "number"
-                        },
-                        "text": {
-                            "type": "string"
-                        }
+                    "specifications": {
+                        "lable": "Specifications",
+                        "format": "object"
+                    },
+                    "reviews": {
+                        "label": "Reviews",
+                        "format": "array"
+                    },
+                    "url": {
+                        "label": "URL",
+                        "format": "link"
                     }
                 }
             }
         }
-    },
-    "views": {}
+    }
 }
