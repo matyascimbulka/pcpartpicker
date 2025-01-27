@@ -1,0 +1,90 @@
+{
+    "actorSpecification": 1,
+    "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+            "id": {
+                "type": "string"
+            },
+            "name": {
+                "type": "string"
+            },
+            "category": {
+                "type": "string"
+            },
+            "url": {
+                "type": "string"
+            },
+            "prices": {
+                "type": "object",
+                "properties": {
+                    "lowestPrice": {
+                        "type": "number"
+                    },
+                    "prices": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "merchant": {
+                                    "type": "string"
+                                },
+                                "availability": {
+                                    "type": "string"
+                                },
+                                "price": {
+                                    "type": "number"
+                                },
+                                "currency": {
+                                    "type": "string"
+                                },
+                                "buyLink": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "ratings": {
+                "type": "object",
+                "properties": {
+                    "averageRating": {
+                        "type": "number"
+                    },
+                    "numberOfRatings": {
+                        "type": "number"
+                    },
+                    "percentages": {
+                        "type": "object"
+                    }
+                }
+            },
+            "specifications": {
+                "type": "object"
+            },
+            "reviews": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "author": {
+                            "type": "string"
+                        },
+                        "date": {
+                            "age": "string"
+                        },
+                        "rating": {
+                            "type": "number"
+                        },
+                        "text": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "views": {}
+}
