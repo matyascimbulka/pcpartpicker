@@ -16,19 +16,16 @@ await Actor.init();
 
 const input = await Actor.getInput<Input>() ?? {} as Input;
 
-const proxyConfiguration = await Actor.createProxyConfiguration({
-    groups: ['RESIDENTIAL'],
-    countryCode: 'US',
-});
+const proxyConfiguration = await Actor.createProxyConfiguration();
 
 await Actor.useState<State>(ACTOR_STATE, { productsScraped: 0, maxProducts: input.maxProducts });
 
 const crawler = new PlaywrightCrawler({
     proxyConfiguration,
     requestHandler: router,
+    maxRequestRetries: 10,
     launchContext: {
         launchOptions: {
-            slowMo: 15,
             args: [
                 '--disable-gpu', // Mitigates the "crashing GPU process" issue in Docker containers
             ],
@@ -37,9 +34,6 @@ const crawler = new PlaywrightCrawler({
     browserPoolOptions: {
         maxOpenPagesPerBrowser: 5,
         retireBrowserAfterPageCount: 10,
-    },
-    autoscaledPoolOptions: {
-        desiredConcurrency: 15,
     },
 });
 
