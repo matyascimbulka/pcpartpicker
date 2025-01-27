@@ -1,9 +1,11 @@
 import { CheerioAPI } from 'cheerio';
 import { CheerioRoot } from 'crawlee';
 
-import { Review } from '../interfaces.js';
+import type { Review } from '../interfaces.js';
 
-export const parseReviews = (cheerioRoot: CheerioRoot | CheerioAPI, limit: number = 10): Review[] => {
+export const parseReviews = (cheerioRoot: CheerioRoot | CheerioAPI, limit: number | null = null): Review[] => {
+    if (limit === 0) return [];
+
     const reviews: Review[] = [];
     const $ = cheerioRoot as CheerioRoot;
 

@@ -3,7 +3,7 @@ import { PlaywrightCrawler } from 'crawlee';
 
 import { ACTOR_STATE, LABELS } from './consts.js';
 import { router } from './router.js';
-import { State } from './interfaces.js';
+import type { State } from './interfaces.js';
 
 interface Input {
     searchPhrase: string;

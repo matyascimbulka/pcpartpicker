@@ -3,9 +3,9 @@ import * as cheerio from 'cheerio';
 import { describe, expect, test } from 'vitest';
 
 import { parseReviews } from '../../src/utils/reviews.js';
-import { MAX_REVIEWS_PER_PAGE } from '../../src/consts.js';
 
 const BASE_PATH = '../../sample-data';
+const MAX_REVIEWS_PER_PAGE = 10;
 
 describe('reviewsParser', () => {
     describe('reviewsPage', () => {

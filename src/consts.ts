@@ -1,4 +1,3 @@
-export const MAX_REVIEWS_PER_PAGE = 10;
 export const ACTOR_STATE = 'ACTOR_STATE';
 
 export const LABELS = {

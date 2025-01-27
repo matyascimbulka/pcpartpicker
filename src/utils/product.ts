@@ -1,33 +1,27 @@
-import { Actor, log } from 'apify';
+import { Actor } from 'apify';
 import { CheerioRoot } from 'crawlee';
 import { CheerioAPI } from 'cheerio';
 
-import { Product, PriceBlock, ProductPrice, Ratings, State } from '../interfaces.js';
 import { ACTOR_STATE } from '../consts.js';
+import type { Product, PriceBlock, ProductPrice, Ratings, State } from '../interfaces.js';
 
-export const saveProduct = async (product: Product) => {
+export const saveProduct = async (product: Product): Promise<boolean> => {
     const state = await Actor.useState<State>(ACTOR_STATE);
 
-    try {
-        await Actor.pushData({
-            id: product.id,
-            name: product.name,
-            category: product.category,
-            url: product.url,
-            prices: product.prices,
-            ratings: product.ratings,
-            specifications: product.specifications,
-            reviews: product.reviews,
-        });
+    await Actor.pushData({
+        id: product.id,
+        name: product.name,
+        category: product.category,
+        url: product.url,
+        prices: product.prices,
+        ratings: product.ratings,
+        specifications: product.specifications,
+        reviews: product.reviews,
+    });
 
-        state.productsScraped += 1;
+    state.productsScraped += 1;
 
-        if (state.maxProducts && state.maxProducts === state.productsScraped) {
-            await Actor.exit('Reached maximum number of products');
-        }
-    } catch (error) {
-        log.warning('Unable to push data into dataset', { error });
-    }
+    return !!(state.maxProducts && state.maxProducts === state.productsScraped);
 };
 
 export const parseProduct = (cheerioRoot: CheerioRoot | CheerioAPI, url: string): Product => {
@@ -53,7 +47,7 @@ export const parsePrices = (cheerioRoot: CheerioRoot | CheerioAPI): PriceBlock |
     if (rows.length === 0) return undefined;
 
     const prices: ProductPrice[] = [];
-    let lowestPrice: number = Number.MAX_VALUE;
+    let lowestPrice: number | undefined;
 
     for (const row of rows) {
         const logoAnchor = $(row).find('td[class*="logo"] a');

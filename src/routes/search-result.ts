@@ -1,10 +1,10 @@
 import { PlaywrightCrawlingContext } from 'crawlee';
 
 import { LABELS } from '../consts.js';
-import { SearchUserData } from '../interfaces.js';
 import { parsePageNumbers } from '../utils/pagination.js';
+import type { SearchUserData } from '../interfaces.js';
 
-const handleSearchResults = async ({ request, page, log, parseWithCheerio, enqueueLinks, addRequests }: PlaywrightCrawlingContext<SearchUserData>) => {
+export const handleSearchResults = async ({ request, page, log, parseWithCheerio, enqueueLinks, addRequests }: PlaywrightCrawlingContext<SearchUserData>) => {
     const { searchPhrase, category, maxReviews } = request.userData;
 
     await page.waitForSelector('tr[class*="product"]');
@@ -49,5 +49,3 @@ const handleSearchResults = async ({ request, page, log, parseWithCheerio, enque
         url: request.url,
     });
 };
-
-export default handleSearchResults;

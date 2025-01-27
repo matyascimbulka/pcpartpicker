@@ -32,7 +32,7 @@ export interface Product {
 }
 
 export interface PriceBlock {
-    lowestPrice: number;
+    lowestPrice?: number;
     prices: ProductPrice[];
 }
 

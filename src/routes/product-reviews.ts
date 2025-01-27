@@ -1,12 +1,12 @@
 import { PlaywrightCrawlingContext } from 'crawlee';
 
-import { LABELS, MAX_REVIEWS_PER_PAGE } from '../consts.js';
-import { ReviewsUserData } from '../interfaces.js';
+import { LABELS } from '../consts.js';
 import { parseReviews } from '../utils/reviews.js';
 import { parsePageNumbers } from '../utils/pagination.js';
 import { saveProduct } from '../utils/product.js';
+import type { ReviewsUserData } from '../interfaces.js';
 
-const handleProductReviews = async ({ request, page, log, parseWithCheerio, addRequests }: PlaywrightCrawlingContext<ReviewsUserData>) => {
+export const handleProductReviews = async ({ request, page, log, crawler, parseWithCheerio, addRequests }: PlaywrightCrawlingContext<ReviewsUserData>) => {
     const { product, maxReviews } = request.userData;
 
     await page.waitForLoadState('load');
@@ -14,7 +14,7 @@ const handleProductReviews = async ({ request, page, log, parseWithCheerio, addR
 
     if (!product.reviews) product.reviews = [];
 
-    const limit = !maxReviews ? MAX_REVIEWS_PER_PAGE : maxReviews - product.reviews.length;
+    const limit = !maxReviews ? null : maxReviews - product.reviews.length;
 
     const scrapedReviews = parseReviews($, limit);
     product.reviews = product.reviews.concat(scrapedReviews);
@@ -29,10 +29,14 @@ const handleProductReviews = async ({ request, page, log, parseWithCheerio, addR
             userData: request.userData,
         }], { forefront: true });
     } else {
-        await saveProduct(product);
+        log.info(`Scraped ${scrapedReviews.length} reviews (${product.reviews.length} in total)`
+            + `for ${product.name}, pushing to dataset`, { url: request.url });
+
+        const shouldExit = await saveProduct(product);
+
+        if (shouldExit) await crawler.stop();
     }
 
-    log.info(`Scraped ${scrapedReviews.length} reviews (${product.reviews.length} in total) for ${product.name}`, { url: request.url });
+    log.info(`Scraped ${scrapedReviews.length} reviews (${product.reviews.length} in total)`
+        + `for ${product.name}, enqueueing next review page`, { url: request.url });
 };
-
-export default handleProductReviews;
