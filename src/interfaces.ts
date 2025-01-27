@@ -8,7 +8,6 @@ export interface ProductCountState {
 }
 
 export interface ProductUserData {
-    scrapeReviews: boolean;
     maxReviews?: number;
 }
 

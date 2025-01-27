@@ -5,7 +5,7 @@ import { SearchUserData } from '../interfaces.js';
 import { parsePageNumbers } from '../utils/pagination.js';
 
 const handleSearchResults = async ({ request, page, log, parseWithCheerio, enqueueLinks, addRequests }: PlaywrightCrawlingContext<SearchUserData>) => {
-    const { searchPhrase, category, scrapeReviews, maxReviews } = request.userData;
+    const { searchPhrase, category, maxReviews } = request.userData;
 
     await page.waitForSelector('tr[class*="product"]');
 
@@ -25,7 +25,6 @@ const handleSearchResults = async ({ request, page, log, parseWithCheerio, enque
         selector: 'tbody[id*="content"] td[class*="name"] a',
         label: LABELS.PRODUCT_PAGE,
         userData: {
-            scrapeReviews,
             maxReviews,
         },
     });
@@ -44,9 +43,9 @@ const handleSearchResults = async ({ request, page, log, parseWithCheerio, enque
     }
 
     log.info(`Search phrase: ${!searchPhrase ? '< N/A >' : searchPhrase}, `
-            + `Category: ${category}, `
-            + `Current page: ${currentPageNumber}, `
-            + `Total pages: ${lastPageNumber}`, {
+        + `Category: ${category}, `
+        + `Current page: ${currentPageNumber}, `
+        + `Total pages: ${lastPageNumber}`, {
         url: request.url,
     });
 };

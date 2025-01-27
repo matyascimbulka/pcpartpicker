@@ -9,7 +9,6 @@ interface Input {
     searchPhrase: string;
     category: string;
     maxProducts?: number;
-    scrapeReviews: boolean;
     maxReviews?: number
 }
 

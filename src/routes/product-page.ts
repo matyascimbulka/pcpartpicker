@@ -16,12 +16,12 @@ const handleProductPage = async ({ page, request, log, parseWithCheerio, addRequ
     product.ratings = parseRatings($);
     product.specifications = parseSpecs($);
 
-    const { scrapeReviews, maxReviews } = request.userData;
+    const { maxReviews } = request.userData;
 
-    if (scrapeReviews) {
+    if (maxReviews && maxReviews > 0) {
         product.reviews = parseReviews($, maxReviews);
 
-        if (maxReviews && product.reviews.length < maxReviews && product.reviews.length === MAX_REVIEWS_PER_PAGE) {
+        if (product.reviews.length < maxReviews && product.reviews.length === MAX_REVIEWS_PER_PAGE) {
             await addRequests([{
                 url: `https://pcpartpicker.com/product/${product.id}/reviews/?page=2`,
                 label: LABELS.PRODUCT_REVIEWS,

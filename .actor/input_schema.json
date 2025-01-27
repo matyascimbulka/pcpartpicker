@@ -77,22 +77,15 @@
             "editor": "number",
             "nullable": true
         },
-        "scrapeReviews": {
-            "title": "Scrape reviews",
-            "type": "boolean",
-            "description": "Scrape reviews for each product upto the maximum number.",
-            "prefill": true
-        },
         "maxReviews": {
             "title": "Max reviews",
             "type": "integer",
             "description": "How many raviews to scrape for each product.",
-            "editor": "number",
-            "nullable": true
+            "default": 0,
+            "editor": "number"
         }
     },
     "required": [
-        "category",
-        "scrapeReviews"
+        "category"
     ]
 }
