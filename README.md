@@ -13,9 +13,8 @@ The scraper provides structured data that can be easily integrated into price co
 The input of the scraper is JSON containing these parameters:
 
 - `searchPhrase` - Search phrase used in filtering the results. This parameter is **optional**, and when it is missing the entire category is used with default sorting.
-- `category` - Select which category to scrape. This is a **required** parameter and must have one of the following values: `cpu`, `cpu-cooler`, `motherboard`, `memory`, `storage`, `video-card`, `power-supply`, `case`, `headphones`, `keyboard`, `mouse`, `speakers`, `webcam`, `monitor`, `os`, `sound-card`, `wired-network-card`, `wireless-network-card`, `case-fan`, `fan-controller`, `thermal-past`, `external-hard-drives`, `optical-drive`, or `ups`
+- `category` - Select which category to scrape. **Required** parameter.
 - `maxProducts` - How many products should be scraped. This is **optional** paremeter and when it is not present the actor will scrape all products with search phrase and category combination.
-- `scrapeReviews` - A **required** parameter which will cause the scraper to extract reviews of each product.
 - `scrapeReviews` - How many reviews of each product should be returned. **Optional** parameter, when it is not present the actor will scrape all reviews for each product.
 
 ### Example input
@@ -24,7 +23,6 @@ The input of the scraper is JSON containing these parameters:
     "searchPhrase": "ryzen 5",
     "category": "cpu",
     "maxProducts": 100,
-    "scrapeReviews": true,
     "maxReviews": 20
 }
 ```
