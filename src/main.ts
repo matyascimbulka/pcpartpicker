@@ -1,9 +1,9 @@
 import { Actor } from 'apify';
 import { PlaywrightCrawler } from 'crawlee';
 
-import { LABELS } from './consts.js';
+import { ACTOR_STATE, LABELS } from './consts.js';
 import { router } from './router.js';
-import actorState from './actor-state.js';
+import { State } from './interfaces.js';
 
 interface Input {
     searchPhrase: string;
@@ -21,7 +21,7 @@ const proxyConfiguration = await Actor.createProxyConfiguration({
     countryCode: 'US',
 });
 
-await actorState.init(input.maxProducts);
+await Actor.useState<State>(ACTOR_STATE, { productsScraped: 0, maxProducts: input.maxProducts });
 
 const crawler = new PlaywrightCrawler({
     proxyConfiguration,

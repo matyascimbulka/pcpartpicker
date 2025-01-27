@@ -2,11 +2,11 @@ import { Actor, log } from 'apify';
 import { CheerioRoot } from 'crawlee';
 import { CheerioAPI } from 'cheerio';
 
-import actorState from '../actor-state.js';
-import { Product, PriceBlock, ProductPrice, Ratings } from '../interfaces.js';
+import { Product, PriceBlock, ProductPrice, Ratings, State } from '../interfaces.js';
+import { ACTOR_STATE } from '../consts.js';
 
 export const saveProduct = async (product: Product) => {
-    const { state } = actorState;
+    const state = await Actor.useState<State>(ACTOR_STATE);
 
     try {
         await Actor.pushData({

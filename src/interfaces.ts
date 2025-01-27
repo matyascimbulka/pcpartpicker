@@ -1,3 +1,8 @@
+export interface State {
+    productsScraped: number;
+    maxProducts?: number;
+}
+
 export interface SearchUserData extends ProductUserData {
     searchPhrase: string;
     category: string;
