@@ -29,7 +29,7 @@ export const handleProductReviews = async ({ request, page, log, crawler, parseW
             userData: request.userData,
         }], { forefront: true });
     } else {
-        log.info(`Scraped ${scrapedReviews.length} reviews (${product.reviews.length} in total)`
+        log.info(`Scraped ${scrapedReviews.length} reviews (${product.reviews.length} in total) `
             + `for ${product.name}, pushing to dataset`, { url: request.url });
 
         const shouldExit = await saveProduct(product);
@@ -37,6 +37,6 @@ export const handleProductReviews = async ({ request, page, log, crawler, parseW
         if (shouldExit) await crawler.stop();
     }
 
-    log.info(`Scraped ${scrapedReviews.length} reviews (${product.reviews.length} in total)`
+    log.info(`Scraped ${scrapedReviews.length} reviews (${product.reviews.length} in total) `
         + `for ${product.name}, enqueueing next review page`, { url: request.url });
 };

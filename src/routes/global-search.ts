@@ -30,7 +30,7 @@ export const handleGlobalSearch = async ({ page, request, log, parseWithCheerio,
         }]);
     }
 
-    log.info(`Searching all categories for ${searchPhrase}`
+    log.info(`Searching all categories for ${searchPhrase}, `
         + `Current page: ${currentPageNumber}, `
         + `Total pages: ${lastPageNumber}`, {
         url: request.url,
