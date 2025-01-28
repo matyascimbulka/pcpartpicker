@@ -15,7 +15,7 @@
             "type": "string",
             "description": "Category to search",
             "editor": "select",
-            "default": "cpu",
+            "default": "all",
             "enum": [
                 "all",
                 "cpu",
