@@ -23,6 +23,9 @@ export const handleProductReviews = async ({ request, page, log, crawler, parseW
     const canContinue = (!maxReviews || maxReviews > product.reviews.length) && (lastPageNumber > currentPageNumber);
 
     if (canContinue) {
+        log.info(`Scraped ${scrapedReviews.length} reviews (${product.reviews.length} in total) `
+            + `for ${product.name}, enqueueing next review page`, { url: request.url });
+
         await addRequests([{
             url: `https://pcpartpicker.com/product/${product.id}/reviews/?page=${currentPageNumber + 1}`,
             label: LABELS.PRODUCT_REVIEWS,
@@ -36,7 +39,4 @@ export const handleProductReviews = async ({ request, page, log, crawler, parseW
 
         if (shouldExit) await crawler.stop();
     }
-
-    log.info(`Scraped ${scrapedReviews.length} reviews (${product.reviews.length} in total) `
-        + `for ${product.name}, enqueueing next review page`, { url: request.url });
 };
