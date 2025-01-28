@@ -8,7 +8,8 @@
             "title": "Search phrase",
             "type": "string",
             "description": "What to search for in the selected category. This field must be filled when searching all categories.",
-            "editor": "textfield"
+            "editor": "textfield",
+            "default": "AMD"
         },
         "category": {
             "title": "Category to search",
@@ -75,7 +76,7 @@
             "title": "Max products",
             "type": "integer",
             "description": "Maximum amount of product to return",
-            "default": 200,
+            "default": 50,
             "editor": "number",
             "nullable": true
         },
