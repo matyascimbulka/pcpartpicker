@@ -17,7 +17,7 @@ The input of the scraper is JSON containing these parameters:
 - `maxProducts` - How many products should be scraped.
 - `scrapeReviews` - How many reviews of each product should be returned.
 
-For more information on inputs have a look here [https://apify.com/apify/pcpartpicker-scraper/input-schema](https://apify.com/apify/pcpartpicker-scraper/input-schema)
+For more information on inputs have a look here [https://apify.com/matyascimbulka/pcpartpicker-scraper/input-schema](https://apify.com/matyascimbulka/pcpartpicker-scraper/input-schema)
 
 ### Example input
 ```json
