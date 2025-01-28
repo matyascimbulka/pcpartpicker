@@ -1,0 +1,53 @@
+{
+    "actorSpecification": 1,
+    "fields": {},
+    "views": {
+        "overview": {
+            "title": "Overview",
+            "transformation": {
+                "fields": [
+                    "name",
+                    "category",
+                    "prices",
+                    "ratings",
+                    "specifications",
+                    "reviews",
+                    "url"
+                ]
+            },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "name": {
+                        "label": "Name",
+                        "format": "text"
+                    },
+                    "category": {
+                        "label": "Category",
+                        "format": "text"
+                    },
+                    "prices": {
+                        "label": "Prices",
+                        "format": "object"
+                    },
+                    "ratings": {
+                        "label": "Ratings",
+                        "format": "array"
+                    },
+                    "specifications": {
+                        "lable": "Specifications",
+                        "format": "object"
+                    },
+                    "reviews": {
+                        "label": "Reviews",
+                        "format": "array"
+                    },
+                    "url": {
+                        "label": "URL",
+                        "format": "link"
+                    }
+                }
+            }
+        }
+    }
+}

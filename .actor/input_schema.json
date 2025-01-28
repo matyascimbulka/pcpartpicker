@@ -1,0 +1,93 @@
+{
+    "title": "CPartPicker scraper",
+    "description": "This is actor input schema",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "searchPhrase": {
+            "title": "Search phrase",
+            "type": "string",
+            "description": "What to search for in the selected category. This field must be filled when searching all categories.",
+            "editor": "textfield"
+        },
+        "category": {
+            "title": "Category to search",
+            "type": "string",
+            "description": "Category to search",
+            "editor": "select",
+            "default": "all",
+            "enum": [
+                "all",
+                "cpu",
+                "cpu-cooler",
+                "motherboard",
+                "memory",
+                "storage",
+                "video-card",
+                "power-supply",
+                "case",
+                "headphones",
+                "keyboard",
+                "mouse",
+                "speakers",
+                "webcam",
+                "monitor",
+                "os",
+                "sound-card",
+                "wired-network-card",
+                "wireless-network-card",
+                "case-fan",
+                "fan-controller",
+                "thermal-past",
+                "external-hard-drives",
+                "optical-drive",
+                "ups"
+            ],
+            "enumTitles": [
+                "All categories",
+                "CPU",
+                "CPU Coolers",
+                "Motherboards",
+                "Memory",
+                "Storage",
+                "Video Card",
+                "Power Supplies",
+                "Cases",
+                "Headphones",
+                "Keyboards",
+                "Mice",
+                "Speakers",
+                "Webcams",
+                "Monitors",
+                "Operating Systems",
+                "Sound Cards",
+                "Wired Networking",
+                "Wireless Networking",
+                "Case Fans",
+                "Fan Controllers",
+                "Thermal Compound",
+                "External Hard Drives",
+                "Optical Drives",
+                "Uninterruptible Power Supply"
+            ]
+        },
+        "maxProducts": {
+            "title": "Max products",
+            "type": "integer",
+            "description": "Maximum amount of product to return",
+            "default": 200,
+            "editor": "number",
+            "nullable": true
+        },
+        "maxReviews": {
+            "title": "Max reviews",
+            "type": "integer",
+            "description": "How many raviews to scrape for each product.",
+            "default": 0,
+            "editor": "number"
+        }
+    },
+    "required": [
+        "category"
+    ]
+}
