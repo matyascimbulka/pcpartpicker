@@ -12,10 +12,12 @@ The scraper provides structured data that can be easily integrated into price co
 ## Input Paramenters
 The input of the scraper is JSON containing these parameters:
 
-- `searchPhrase` - Search phrase used in filtering the results. This parameter is **optional**, and when it is missing the entire category is used with default sorting.
-- `category` - Select which category to scrape. **Required** parameter.
-- `maxProducts` - How many products should be scraped. This is **optional** paremeter and when it is not present the actor will scrape all products with search phrase and category combination.
-- `scrapeReviews` - How many reviews of each product should be returned. **Optional** parameter, when it is not present the actor will scrape all reviews for each product.
+- `searchPhrase` - Search phrase used in filtering the results. This parameter is required only when searching all categories.
+- `category` - Select which category to scrape.
+- `maxProducts` - How many products should be scraped.
+- `scrapeReviews` - How many reviews of each product should be returned.
+
+For more information on inputs have a look here [https://apify.com/apify/pcpartpicker-scraper/input-schema](https://apify.com/apify/pcpartpicker-scraper/input-schema)
 
 ### Example input
 ```json
