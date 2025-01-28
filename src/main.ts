@@ -1,4 +1,4 @@
-import { Actor } from 'apify';
+import { Actor, log } from 'apify';
 import { PlaywrightCrawler } from 'crawlee';
 
 import { ACTOR_STATE, LABELS } from './consts.js';
@@ -16,6 +16,11 @@ await Actor.init();
 
 const input = await Actor.getInput<Input>() ?? {} as Input;
 
+if (input.category === 'all' && !input.searchPhrase) {
+    log.error('Search phrase can not be empty when searching all categories');
+    await Actor.exit();
+}
+
 const proxyConfiguration = await Actor.createProxyConfiguration();
 
 await Actor.useState<State>(ACTOR_STATE, { productsScraped: 0, maxProducts: input.maxProducts });
@@ -23,7 +28,7 @@ await Actor.useState<State>(ACTOR_STATE, { productsScraped: 0, maxProducts: inpu
 const crawler = new PlaywrightCrawler({
     proxyConfiguration,
     requestHandler: router,
-    maxRequestRetries: 10,
+    maxRequestRetries: 15,
     launchContext: {
         launchOptions: {
             args: [
@@ -37,9 +42,17 @@ const crawler = new PlaywrightCrawler({
     },
 });
 
+const url = input.category === 'all'
+    ? `https://pcpartpicker.com/search/?q=${input.searchPhrase.replace(' ', '+')}`
+    : `https://pcpartpicker.com/products/${input.category}`;
+
 await crawler.run([{
-    url: `https://pcpartpicker.com/products/${input.category}`,
-    label: LABELS.SEARCH_RESULTS,
-    userData: input,
+    url,
+    label: input.category === 'all' ? LABELS.GLOBAL_SEARCH : LABELS.CATEGORY_SEARCH,
+    userData: {
+        searchPhrase: input.searchPhrase,
+        category: input.category,
+        maxReviews: input.maxReviews,
+    },
 }]);
 await Actor.exit();
