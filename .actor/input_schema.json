@@ -9,14 +9,14 @@
             "type": "string",
             "description": "What to search for in the selected category. This field must be filled when searching all categories.",
             "editor": "textfield",
-            "default": "AMD"
+            "prefill": "AMD"
         },
         "category": {
             "title": "Category to search",
             "type": "string",
             "description": "Category to search",
             "editor": "select",
-            "default": "all",
+            "prefill": "all",
             "enum": [
                 "all",
                 "cpu",
@@ -76,7 +76,7 @@
             "title": "Max products",
             "type": "integer",
             "description": "Maximum amount of product to return",
-            "default": 50,
+            "prefill": 50,
             "editor": "number",
             "nullable": true
         },
@@ -84,7 +84,7 @@
             "title": "Max reviews",
             "type": "integer",
             "description": "How many raviews to scrape for each product.",
-            "default": 0,
+            "prefill": 0,
             "editor": "number"
         }
     },

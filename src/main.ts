@@ -14,7 +14,12 @@ interface Input {
 
 await Actor.init();
 
-const input = await Actor.getInput<Input>() ?? {} as Input;
+const input = await Actor.getInput<Input>() ?? {
+    searchPhrase: 'AMD',
+    category: 'all',
+    maxProducts: 50,
+    maxReviews: 0,
+} as Input;
 
 if (input.category === 'all' && !input.searchPhrase) {
     log.error('Search phrase can not be empty when searching all categories');
