@@ -7,3 +7,29 @@ export const LABELS = {
     PRODUCT_REVIEWS: 'PRODUCT_REVIEWS',
 } as const;
 export type Label = (typeof LABELS)[keyof typeof LABELS]
+
+export const AVAILABLE_COUNTRY_CODES = [
+    'au',
+    'at',
+    'be',
+    'ca',
+    'cz',
+    'dk',
+    'fi',
+    'fr',
+    'de',
+    'hu',
+    'ie',
+    'it',
+    'nl',
+    'nz',
+    'no',
+    'pt',
+    'ro',
+    'sa',
+    'sk',
+    'es',
+    'se',
+    'uk',
+    'us',
+];
