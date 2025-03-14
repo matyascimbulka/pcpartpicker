@@ -12,7 +12,7 @@ The scraper provides structured data that can be easily integrated into price co
 ## Input Paramenters
 The input of the scraper is JSON containing these parameters:
 
-- `searchPhrase` - Search phrase used in filtering the results. This parameter is required only when searching all categories.
+- `searchPhrases` - A list of search phrases used in filtering the results. This parameter is required only when searching all categories.
 - `category` - Select which category to scrape.
 - `maxProducts` - How many products should be scraped.
 - `maxReviews` - How many reviews of each product should be returned.
@@ -23,7 +23,9 @@ For more information on inputs have a look here [https://apify.com/matyascimbulk
 ### Example input
 ```json
 {
-    "searchPhrase": "ryzen 5",
+    "searchPhrases": [
+        "ryzen 5"
+    ],
     "category": "cpu",
     "maxProducts": 100,
     "maxReviews": 20,

@@ -10,7 +10,7 @@
         "apify": "^3.2.6",
         "camoufox-js": "^0.2.1",
         "cheerio": "^1.0.0",
-        "crawlee": "^3.12.2",
+        "crawlee": "^3.11.5",
         "playwright": "1.50.1"
     },
     "devDependencies": {
