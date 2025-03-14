@@ -1,5 +1,5 @@
 import { Actor, log } from 'apify';
-import { PlaywrightCrawler } from 'crawlee';
+import { PlaywrightCrawler, RequestOptions } from 'crawlee';
 import { firefox } from 'playwright';
 import { launchOptions as camoufoxLaunchOptions } from 'camoufox-js';
 
@@ -8,7 +8,7 @@ import { router } from './router.js';
 import type { State } from './interfaces.js';
 
 interface Input {
-    searchPhrase: string;
+    searchPhrases: string[];
     category: string;
     maxProducts?: number;
     maxReviews?: number;
@@ -18,14 +18,14 @@ interface Input {
 await Actor.init();
 
 const input = await Actor.getInput<Input>() ?? {
-    searchPhrase: 'AMD',
+    searchPhrases: ['AMD'],
     category: 'all',
-    maxProducts: 50,
+    maxProducts: 20,
     maxReviews: 0,
     countryCode: 'us',
 } as Input;
 
-if (input.category === 'all' && !input.searchPhrase) {
+if (input.category === 'all' && !input.searchPhrases) {
     log.error('Search phrase can not be empty when searching all categories');
     await Actor.exit();
 }
@@ -46,7 +46,7 @@ const crawler = new PlaywrightCrawler({
     launchContext: {
         launcher: firefox,
         launchOptions: await camoufoxLaunchOptions({
-            headless: true,
+            humanize: true,
         }),
     },
     browserPoolOptions: {
@@ -55,18 +55,24 @@ const crawler = new PlaywrightCrawler({
     },
 });
 
+const requests: RequestOptions[] = [];
 const urlBase = `https://${input.countryCode !== 'us' ? `${input.countryCode}.` : ''}pcpartpicker.com`;
-const url = input.category === 'all'
-    ? `${urlBase}/search/?q=${input.searchPhrase.replace(' ', '+')}`
-    : `${urlBase}/products/${input.category}`;
 
-await crawler.run([{
-    url,
-    label: input.category === 'all' ? LABELS.GLOBAL_SEARCH : LABELS.CATEGORY_SEARCH,
-    userData: {
-        searchPhrase: input.searchPhrase,
-        category: input.category,
-        maxReviews: input.maxReviews,
-    },
-}]);
+for (const searchPhrase of input.searchPhrases) {
+    const url = input.category === 'all'
+        ? `${urlBase}/search/?q=${searchPhrase.replace(' ', '+')}`
+        : `${urlBase}/products/${input.category}`;
+
+    requests.push({
+        url,
+        label: input.category === 'all' ? LABELS.GLOBAL_SEARCH : LABELS.CATEGORY_SEARCH,
+        userData: {
+            searchPhrase,
+            category: input.category,
+            maxReviews: input.maxReviews,
+        },
+    });
+}
+
+await crawler.run(requests);
 await Actor.exit();

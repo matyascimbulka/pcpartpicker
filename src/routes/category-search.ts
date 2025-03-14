@@ -14,7 +14,7 @@ export const handleCategorySearch = async ({
 }: PlaywrightCrawlingContext<SearchUserData>) => {
     const { searchPhrase, category, maxReviews } = request.userData;
 
-    await page.waitForSelector('tr[class*="product"]');
+    await page.waitForSelector('tr[data-pb-id]');
 
     if (searchPhrase) {
         const responsePromise = page.waitForResponse((responseRequest) => responseRequest.url().includes('/qapi/product/category'));

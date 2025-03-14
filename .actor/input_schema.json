@@ -4,12 +4,12 @@
     "type": "object",
     "schemaVersion": 1,
     "properties": {
-        "searchPhrase": {
+        "searchPhrases": {
             "title": "Search phrase",
-            "type": "string",
+            "type": "array",
             "description": "What to search for in the selected category. This field must be filled when searching all categories.",
-            "editor": "textfield",
-            "prefill": "AMD"
+            "editor": "stringList",
+            "prefill": ["AMD"]
         },
         "category": {
             "title": "Category to search",
@@ -76,7 +76,7 @@
             "title": "Max products",
             "type": "integer",
             "description": "Maximum amount of product to return",
-            "prefill": 50,
+            "prefill": 20,
             "editor": "number",
             "nullable": true
         },
