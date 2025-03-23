@@ -9,6 +9,10 @@ export const handleProductPage = async ({ page, request, log, crawler, parseWith
     await page.waitForLoadState('load');
     const $ = await parseWithCheerio();
 
+    if ($('div.main-wrapper').length === 0) {
+        throw new Error('Redirected the product page');
+    }
+
     const product = parseProduct($, request.url);
     product.prices = parsePrices($);
     product.ratings = parseRatings($);
