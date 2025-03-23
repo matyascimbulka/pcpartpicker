@@ -28,6 +28,10 @@ export const handleCategorySearch = async ({
 
     const $ = await parseWithCheerio();
 
+    if ($('div.main-content').length === 0) {
+        throw new Error('No longer on the search page');
+    }
+
     await enqueueLinks({
         selector: 'tbody[id*="content"] td[class*="name"] a',
         label: LABELS.PRODUCT_PAGE,

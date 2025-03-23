@@ -12,6 +12,10 @@ export const handleProductReviews = async ({ request, page, log, crawler, parseW
     await page.waitForLoadState('load');
     const $ = await parseWithCheerio();
 
+    if ($('div.main-wrapper').length === 0) {
+        throw new Error('Redirected the product page');
+    }
+
     if (!product.reviews) product.reviews = [];
 
     const limit = !maxReviews ? null : maxReviews - product.reviews.length;

@@ -10,6 +10,10 @@ export const handleGlobalSearch = async ({ page, request, log, parseWithCheerio,
     await page.waitForLoadState('load');
     const $ = await parseWithCheerio();
 
+    if ($('section.main-content').length === 0) {
+        throw new Error('No longer on the search page');
+    }
+
     await enqueueLinks({
         selector: 'li p[class*="link"] a',
         label: LABELS.PRODUCT_PAGE,
