@@ -75,15 +75,15 @@
         "maxProducts": {
             "title": "Max products",
             "type": "integer",
-            "description": "Maximum amount of product to return",
-            "prefill": 20,
+            "description": "Maximum amount of products to return",
+            "prefill": 1,
             "editor": "number",
             "nullable": true
         },
         "maxReviews": {
             "title": "Max reviews",
             "type": "integer",
-            "description": "How many raviews to scrape for each product.",
+            "description": "How many reviews to scrape for each product.",
             "prefill": 0,
             "editor": "number"
         },
